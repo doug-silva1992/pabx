@@ -36,7 +36,7 @@ Laravel Sanctum com token Bearer. Endpoints (documentados no Swagger):
 | GET    | `/api/auth/me`       | Usuário autenticado          |
 | POST   | `/api/auth/logout`   | Revoga o token atual         |
 
-No frontend: `/login`, `/cadastro` e a área logada em `/pabx` (menu com Ramais,
+No frontend: `/login`, `/cadastro` e a área logada em `/pabx` (menu com **Webphone**, Ramais,
 Chamadas, Filas, URA, Gravações, **Speech Analytics** e Configurações).
 
 ## Como frontend e backend se conectam

@@ -7,6 +7,7 @@ import { RegisterPage } from './pages/auth/RegisterPage'
 import { DashboardPage } from './pages/pabx/DashboardPage'
 import { PlaceholderPage } from './pages/pabx/PlaceholderPage'
 import { SpeechAnalyticsPage } from './pages/pabx/SpeechAnalyticsPage'
+import { WebphonePage } from './pages/pabx/WebphonePage'
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route path="/pabx" element={<PabxLayout />}>
               <Route index element={<DashboardPage />} />
-              <Route path="ramais" element={<PlaceholderPage title="Ramais" />} />
+              <Route path="webphone" element={<WebphonePage />} />
+              <Route path="ramais"element={<PlaceholderPage title="Ramais" />} />
               <Route path="chamadas" element={<PlaceholderPage title="Chamadas" />} />
               <Route path="filas" element={<PlaceholderPage title="Filas" />} />
               <Route path="ura" element={<PlaceholderPage title="URA" />} />

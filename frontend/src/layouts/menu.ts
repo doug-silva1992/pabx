@@ -4,6 +4,7 @@ export type MenuItem = { to: string; label: string; icon: IconName; end?: boolea
 
 export const menu: MenuItem[] = [
   { to: '/pabx', label: 'Painel', icon: 'dashboard', end: true },
+  { to: '/pabx/webphone', label: 'Webphone', icon: 'webphone' },
   { to: '/pabx/ramais', label: 'Ramais', icon: 'extensions' },
   { to: '/pabx/chamadas', label: 'Chamadas', icon: 'calls' },
   { to: '/pabx/filas', label: 'Filas', icon: 'queues' },

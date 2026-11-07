@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../auth/useAuth'
-import type { RegisterData } from '../../auth/AuthContext'
+import type { RegisterData } from '../../auth/context'
 import { ApiError } from '../../lib/api'
 import { AuthLayout } from './AuthLayout'
 
