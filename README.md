@@ -25,6 +25,20 @@ docker compose up -d --build
 
 As portas podem ser alteradas com `FRONTEND_PORT`, `BACKEND_PORT` e `DB_PORT` (ex.: num arquivo `.env` na raiz).
 
+## Autenticação
+
+Laravel Sanctum com token Bearer. Endpoints (documentados no Swagger):
+
+| Método | Rota                 | Descrição                    |
+|--------|----------------------|------------------------------|
+| POST   | `/api/auth/register` | Cria usuário e retorna token |
+| POST   | `/api/auth/login`    | Login, retorna token         |
+| GET    | `/api/auth/me`       | Usuário autenticado          |
+| POST   | `/api/auth/logout`   | Revoga o token atual         |
+
+No frontend: `/login`, `/cadastro` e a área logada em `/pabx` (menu com Ramais,
+Chamadas, Filas, URA, Gravações, **Speech Analytics** e Configurações).
+
 ## Como frontend e backend se conectam
 
 O dev server do Vite faz proxy de `/api` e `/docs` para o Laravel

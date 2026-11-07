@@ -1,46 +1,40 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-
-type Health = {
-  status: string
-  database: string
-  timestamp: string
-}
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
+import { AuthProvider } from './auth/AuthContext'
+import { GuestOnly, RequireAuth } from './auth/RouteGuards'
+import { PabxLayout } from './layouts/PabxLayout'
+import { LoginPage } from './pages/auth/LoginPage'
+import { RegisterPage } from './pages/auth/RegisterPage'
+import { DashboardPage } from './pages/pabx/DashboardPage'
+import { PlaceholderPage } from './pages/pabx/PlaceholderPage'
+import { SpeechAnalyticsPage } from './pages/pabx/SpeechAnalyticsPage'
 
 function App() {
-  const [health, setHealth] = useState<Health | null>(null)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    fetch('/api/health')
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        return res.json() as Promise<Health>
-      })
-      .then(setHealth)
-      .catch((err: Error) => setError(err.message))
-  }, [])
-
   return (
-    <section id="center">
-      <h1>PABX</h1>
-      <p>React + Vite conectado ao Laravel</p>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route element={<GuestOnly />}>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/cadastro" element={<RegisterPage />} />
+          </Route>
 
-      {error && <p>Erro ao conectar na API: {error}</p>}
-      {!health && !error && <p>Conectando na API...</p>}
-      {health && (
-        <p>
-          API: <strong>{health.status}</strong> · Banco de dados:{' '}
-          <strong>{health.database}</strong>
-        </p>
-      )}
+          <Route element={<RequireAuth />}>
+            <Route path="/pabx" element={<PabxLayout />}>
+              <Route index element={<DashboardPage />} />
+              <Route path="ramais" element={<PlaceholderPage title="Ramais" />} />
+              <Route path="chamadas" element={<PlaceholderPage title="Chamadas" />} />
+              <Route path="filas" element={<PlaceholderPage title="Filas" />} />
+              <Route path="ura" element={<PlaceholderPage title="URA" />} />
+              <Route path="gravacoes" element={<PlaceholderPage title="Gravações" />} />
+              <Route path="speech-analytics" element={<SpeechAnalyticsPage />} />
+              <Route path="configuracoes" element={<PlaceholderPage title="Configurações" />} />
+            </Route>
+          </Route>
 
-      <p>
-        <a href="http://localhost:8000/api/documentation" target="_blank">
-          Abrir documentação Swagger
-        </a>
-      </p>
-    </section>
+          <Route path="*" element={<Navigate to="/pabx" replace />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   )
 }
 
